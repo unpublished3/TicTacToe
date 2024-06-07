@@ -1,56 +1,63 @@
 import customtkinter as tk
 
 
-def create_menu(parent):
-    menu = tk.CTkFrame(parent)
-    menu.pack(fill="both", expand=True)
+class Menu(tk.CTkFrame):
+    _scale_factor = None
+    _text_font_size = None
 
-    scale_factor = (menu.winfo_screenwidth() * menu.winfo_screenheight()) / (
-        2560 * 1600
-    )
-    text_font_size = 25 * scale_factor
+    def __init__(self, parent):
+        tk.CTkFrame.__init__(self, parent)
+        self.pack(fill="both", expand=True)
 
-    # Configure Columns
-    menu.columnconfigure(0, weight=1)
-    menu.columnconfigure(1, weight=1)
+        self._configure_grid()
+        self._scale_factor = (self.winfo_screenwidth() * self.winfo_screenheight()) / (
+            2560 * 1600
+        )
+        self._text_font_size = 25 * self._scale_factor
+        self._create_label()
+        self._create_buttons()
 
-    # Confifure Rows
-    menu.rowconfigure(0, weight=1)
-    menu.rowconfigure(1, weight=1)
-    menu.rowconfigure(2, weight=2)
-    menu.rowconfigure(3, weight=1)
+    def _configure_grid(self):
+        # Configure Columns
+        self.columnconfigure(0, weight=1)
+        self.columnconfigure(1, weight=1)
 
-    label = tk.CTkLabel(menu, text="Play", font=("Arial", text_font_size))
-    label.grid(row=0, column=0, columnspan=2, sticky="nsew")
+        # Confifure Rows
+        self.rowconfigure(0, weight=1)
+        self.rowconfigure(1, weight=1)
+        self.rowconfigure(2, weight=2)
+        self.rowconfigure(3, weight=1)
 
-    x_buttom = tk.CTkButton(
-        menu,
-        text="Play as X",
-        font=("Arial", text_font_size),
-        border_color=("black", "white"),
-        border_width=5,
-        fg_color=("black", "white"),
-        text_color=("white", "black"),
-        border_spacing=10,
-        corner_radius=10,
-        anchor="center",
-        cursor="hand2",
-        hover=False,
-    )
-    o_buttom = tk.CTkButton(
-        menu,
-        text="Play as O",
-        font=("Arial", text_font_size),
-        border_color=("black", "white"),
-        border_width=5,
-        fg_color=("black", "white"),
-        text_color=("white", "black"),
-        border_spacing=10,
-        corner_radius=10,
-        anchor="center",
-        cursor="hand2",
-        hover=False,
-    )
+    def _create_label(self):
+        label = tk.CTkLabel(self, text="Play", font=("Arial", self._text_font_size))
+        label.grid(row=0, column=0, columnspan=2, sticky="nsew")
 
-    x_buttom.grid(row=2, column=0, sticky="n")
-    o_buttom.grid(row=2, column=1, sticky="n")
+    def _create_buttons(self):
+        x_buttom = tk.CTkButton(
+            self,
+            text="Play as X",
+            font=("Arial", self._text_font_size),
+            fg_color=("black", "white"),
+            text_color=("white", "black"),
+            border_spacing=10,
+            corner_radius=10,
+            anchor="center",
+            cursor="hand2",
+            hover_color=("#444546", "#b5b4b5"),
+        )
+
+        o_buttom = tk.CTkButton(
+            self,
+            text="Play as O",
+            font=("Arial", self._text_font_size),
+            fg_color=("black", "white"),
+            text_color=("white", "black"),
+            border_spacing=10,
+            corner_radius=10,
+            anchor="center",
+            cursor="hand2",
+            hover_color=("#444546", "#b5b4b5"),
+        )
+
+        x_buttom.grid(row=2, column=0, sticky="n")
+        o_buttom.grid(row=2, column=1, sticky="n")
