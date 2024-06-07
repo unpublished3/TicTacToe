@@ -19,7 +19,6 @@ class Window(tk.CTk):
         self._configure_grid()
 
         self.menu = Menu(self, self._set_player)
-        self.game = Game(self, "X")
         self.set_frame()
 
     def _configure_grid(self):
@@ -28,17 +27,17 @@ class Window(tk.CTk):
 
     def set_frame(self):
         if not self._player:
-            self.game.grid_remove()
+            # self.game.grid_remove()
             self.menu.grid(row=0, column=0, sticky="snew")
         else:
             self.menu.grid_remove()
+            self.game = Game(self, self._player)
             self.game.grid(row=0, column=0, sticky="snew")
             self.geometry(f"{self.width}x{self.height}")
 
     def _set_player(self, player):
         self._player = player
         self.set_frame()
-
 
 
 window = Window()

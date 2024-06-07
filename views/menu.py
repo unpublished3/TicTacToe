@@ -59,7 +59,7 @@ class Menu(tk.CTkFrame):
             anchor="center",
             cursor="hand2",
             hover_color=("#444546", "#b5b4b5"),
-            command=lambda: self.set_player("X")
+            command=lambda: self.set_player("O")
 
         )
 
