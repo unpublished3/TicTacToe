@@ -1,4 +1,3 @@
-from typing import Tuple
 import customtkinter as tk
 from views.menu import Menu
 from views.game import Game

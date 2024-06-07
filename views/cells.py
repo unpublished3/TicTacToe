@@ -32,7 +32,12 @@ class Cells(tk.CTkFrame):
                         self,
                         textvariable=self._cells[i][j],
                         border_color=("black", "white"),
-                        border_width=5,
+                        border_width=2,
+                        fg_color="transparent",
+                        hover=False,
+                        anchor="center",
+                        cursor="hand2",
+                        corner_radius=0
                     )
                 )
 
