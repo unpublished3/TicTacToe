@@ -1,5 +1,6 @@
 import customtkinter as tk
 from views.menu import create_menu
+from views.game import Game
 
 window = tk.CTk()
 
@@ -9,6 +10,9 @@ height = int(window.winfo_screenheight() * 0.625)
 
 window.geometry(f"600x400")
 window.title("TicTacToe")
-create_menu(window)
+
+game = Game(window, "X")
+# create_menu(window)
+
 
 window.mainloop()
