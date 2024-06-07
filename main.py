@@ -13,11 +13,17 @@ class Window(tk.CTk):
         self.width = int(self.winfo_screenwidth() * 0.325)
         self.height = int(self.winfo_screenheight() * 0.6125)
 
-        self.geometry(f"600x400")
+        x = int(self.winfo_screenwidth() / 2) - (self.width / 2)
+        y = int(self.winfo_screenheight() / 2) - (self.height / 2)
+
+        print(x, y)
+
+        self.geometry("600x400+%d+%d" % (x, y))
         self.title("TicTacToe")
 
         self._configure_grid()
 
+        self.resizable(False, False)
         self.menu = Menu(self, self._set_player)
         self.set_frame()
 
@@ -33,7 +39,9 @@ class Window(tk.CTk):
             self.menu.grid_remove()
             self.game = Game(self, self._player)
             self.game.grid(row=0, column=0, sticky="snew")
+            self.resizable(True, True)
             self.geometry(f"{self.width}x{self.height}")
+            self.resizable(False, False)
 
     def _set_player(self, player):
         self._player = player
