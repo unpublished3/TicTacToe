@@ -16,8 +16,6 @@ class Window(tk.CTk):
         x = int(self.winfo_screenwidth() / 2) - (self.width / 2)
         y = int(self.winfo_screenheight() / 2) - (self.height / 2)
 
-        print(x, y)
-
         self.geometry("600x400+%d+%d" % (x, y))
         self.title("TicTacToe")
 
