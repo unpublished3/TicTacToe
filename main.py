@@ -36,12 +36,4 @@ class Window(tk.CTk):
 
 
 window = Window()
-
-a = int(input("T:"))
-window.switch_frame(a)
-
-a = int(input("T:"))
-window.switch_frame(a)
-
-
 window.mainloop()
