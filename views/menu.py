@@ -5,9 +5,10 @@ class Menu(tk.CTkFrame):
     _scale_factor = None
     _text_font_size = None
 
-    def __init__(self, parent):
+    def __init__(self, parent, set_player):
         tk.CTkFrame.__init__(self, parent)
         self.grid()
+        self.set_player = set_player
 
         self._configure_grid()
         self._scale_factor = (self.winfo_screenwidth() * self.winfo_screenheight()) / (
@@ -44,6 +45,7 @@ class Menu(tk.CTkFrame):
             anchor="center",
             cursor="hand2",
             hover_color=("#444546", "#b5b4b5"),
+            command=lambda: self.set_player("X")
         )
 
         o_buttom = tk.CTkButton(
@@ -57,6 +59,8 @@ class Menu(tk.CTkFrame):
             anchor="center",
             cursor="hand2",
             hover_color=("#444546", "#b5b4b5"),
+            command=lambda: self.set_player("X")
+
         )
 
         x_buttom.grid(row=2, column=0, sticky="n")
