@@ -8,7 +8,7 @@ class Game(tk.CTkFrame):
 
     def __init__(self, parent, player):
         tk.CTkFrame.__init__(self, parent)
-        self.pack(fill="both", expand=True)
+        self.grid()
 
         self._configure_grid()
 

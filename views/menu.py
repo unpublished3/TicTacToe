@@ -7,7 +7,7 @@ class Menu(tk.CTkFrame):
 
     def __init__(self, parent):
         tk.CTkFrame.__init__(self, parent)
-        self.pack(fill="both", expand=True)
+        self.grid()
 
         self._configure_grid()
         self._scale_factor = (self.winfo_screenwidth() * self.winfo_screenheight()) / (
