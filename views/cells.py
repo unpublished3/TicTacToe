@@ -1,5 +1,5 @@
 import customtkinter as tk
-
+import logic
 
 class Cells(tk.CTkFrame):
     _buttons = []
@@ -54,18 +54,6 @@ class Cells(tk.CTkFrame):
                 self._buttons[i][j].grid(row=i, column=j, sticky="nsew")
 
     def _click(self, i, j):
-        self._cells[i][j].set(self.turn())
-        self._turn = self.turn()
+        self._cells[i][j].set(logic.turn(self._cells))
+        self._turn = logic.turn(self._cells)
         self._parent.change_label_text(f"{self._player}'s Turn" if self._player == self._turn else "Computer Thinking...")
-
-    def turn(self):
-        x_count = 0
-        o_count = 0
-
-        for row in self._cells:
-            for cell in row:
-                if cell.get() == "X":
-                    x_count += 1
-                elif cell.get() == "O":
-                    o_count += 1
-        return "X" if x_count == o_count else "O"
