@@ -13,6 +13,7 @@ class Game(tk.CTkFrame):
         self.grid()
 
         self._configure_grid()
+        self._player = player
 
         self._scale_factor = (self.winfo_screenwidth() * self.winfo_screenheight()) / (
             2560 * 1600
@@ -39,7 +40,6 @@ class Game(tk.CTkFrame):
         self.grid_rowconfigure(8, weight=1)
         self.grid_rowconfigure(9, weight=1)
 
-
         self.grid_columnconfigure(0, weight=1)
         self.grid_columnconfigure(1, weight=1)
         self.grid_columnconfigure(2, weight=1)
@@ -57,4 +57,3 @@ class Game(tk.CTkFrame):
 
     def arrange_cells(self):
         self.cells.grid(row=2, column=1, rowspan=6, columnspan=3, sticky="nsew")
-        print(self._cells)
