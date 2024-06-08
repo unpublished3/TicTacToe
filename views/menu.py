@@ -37,7 +37,7 @@ class Menu(tk.CTkFrame):
         x_buttom = tk.CTkButton(
             self,
             text="Play as X",
-            font=("Arial", self._text_font_size),
+            font=("Helvetica", self._text_font_size),
             fg_color=("black", "white"),
             text_color=("white", "black"),
             border_spacing=10,
@@ -51,7 +51,7 @@ class Menu(tk.CTkFrame):
         o_buttom = tk.CTkButton(
             self,
             text="Play as O",
-            font=("Arial", self._text_font_size),
+            font=("Helvetica", self._text_font_size),
             fg_color=("black", "white"),
             text_color=("white", "black"),
             border_spacing=10,

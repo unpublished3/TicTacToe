@@ -1,12 +1,11 @@
 import customtkinter as tk
 
-
 class Cells(tk.CTkFrame):
-    _cells = []
     _buttons = []
 
-    def __init__(self, parent, player):
+    def __init__(self, parent, player, cells):
         super().__init__(parent)
+        self._cells = cells   
 
         self._scale_factor = (self.winfo_screenwidth() * self.winfo_screenheight()) / (
             2560 * 1600
@@ -29,6 +28,7 @@ class Cells(tk.CTkFrame):
     def _create_cells(self):
         for i in range(3):
             self._cells.append([])
+
             self._buttons.append([])
             for j in range(3):
                 self._cells[i].append(tk.StringVar(self, ""))
@@ -44,7 +44,7 @@ class Cells(tk.CTkFrame):
                         cursor="hand2",
                         corner_radius=0,
                         command=lambda i=i, j=j: self._click(i, j),
-                        font=("Arial", self._text_font_size)
+                        font=("Helvetica", self._text_font_size)
                     )
                 )
 

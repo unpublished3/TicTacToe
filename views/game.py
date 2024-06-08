@@ -1,10 +1,12 @@
 import customtkinter as tk
 from .cells import Cells
 
+
 class Game(tk.CTkFrame):
     _scale_factor = None
     _text_font_size = None
     _label_text = None
+    _cells = []
 
     def __init__(self, parent, player):
         tk.CTkFrame.__init__(self, parent)
@@ -20,12 +22,10 @@ class Game(tk.CTkFrame):
         self._label_text = tk.StringVar(
             self, f"{player}'s Turn" if player == "X" else "Computer Thinking..."
         )
-        self.cells = Cells(self, player)
+        self.cells = Cells(self, player, self._cells)
 
         self._create_label()
         self.arrange_cells()
-
-
 
     def _configure_grid(self):
         self.grid_rowconfigure(0, weight=1)
@@ -57,3 +57,4 @@ class Game(tk.CTkFrame):
 
     def arrange_cells(self):
         self.cells.grid(row=2, column=1, rowspan=6, columnspan=3, sticky="nsew")
+        print(self._cells)
