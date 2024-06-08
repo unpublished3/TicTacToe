@@ -1,4 +1,3 @@
-from typing import Any, Tuple
 import customtkinter as tk
 
 
@@ -6,9 +5,15 @@ class Cells(tk.CTkFrame):
     _cells = []
     _buttons = []
 
-    def __init__(self, parent):
+    def __init__(self, parent, player):
         super().__init__(parent)
 
+        self._scale_factor = (self.winfo_screenwidth() * self.winfo_screenheight()) / (
+            2560 * 1600
+        )
+        self._text_font_size = 50 * self._scale_factor
+
+        self._player = player
         self._configure_grid()
         self._create_cells()
 
@@ -37,8 +42,13 @@ class Cells(tk.CTkFrame):
                         hover=False,
                         anchor="center",
                         cursor="hand2",
-                        corner_radius=0
+                        corner_radius=0,
+                        command=lambda i=i, j=j: self._click(i, j),
+                        font=("Arial", self._text_font_size)
                     )
                 )
 
                 self._buttons[i][j].grid(row=i, column=j, sticky="nsew")
+
+    def _click(self, i, j):
+        self._cells[i][j].set(self._player)

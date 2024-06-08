@@ -20,7 +20,7 @@ class Game(tk.CTkFrame):
         self._label_text = tk.StringVar(
             self, f"{player}'s Turn" if player == "X" else "Computer Thinking..."
         )
-        self.cells = Cells(self)
+        self.cells = Cells(self, player)
 
         self._create_label()
         self.arrange_cells()
