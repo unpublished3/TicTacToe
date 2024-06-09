@@ -1,3 +1,6 @@
+import copy
+
+
 def turn(board):
     x_count = 0
     o_count = 0
@@ -86,3 +89,20 @@ def utility(board):
     if check_win(board, "X"):
         return 1
     return -1
+
+
+def actions(board):
+    board_actions = []
+
+    for i, row in enumerate(board):
+        for j, cell in enumerate(row):
+            if cell.get() == "":
+                board_actions.append((i, j))
+    return board_actions
+
+
+def result(board, action):
+    board_copy = copy.deepcopy(board)
+    current_turn = turn(board)
+    board_copy[action[0]][action[1]].set(current_turn)
+    return board_copy
