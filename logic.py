@@ -1,6 +1,7 @@
 import copy
 import random
 
+
 def turn(board):
     x_count = 0
     o_count = 0
@@ -15,72 +16,46 @@ def turn(board):
 
 
 def terminal(board):
-    if check_win(board, "X") or check_win(board, "O") or check_draw(board):
-        return True
-    return False
+    return check_win(board, "X") or check_win(board, "O") or check_draw(board)
 
 
 def check_win(board, piece):
-    if (
+    return (
         check_diagonal(board, piece)
         or check_horizontal(board, piece)
         or check_vertical(board, piece)
-    ):
-        return True
-
-    return False
+    )
 
 
 def check_horizontal(board, piece):
     for i in range(3):
-        if (
-            board[i][0].get() == piece
-            and board[i][1].get() == piece
-            and board[i][2].get() == piece
-        ):
+        if all(board[i][j].get() == piece for j in range(3)):
             return True
     return False
 
 
 def check_vertical(board, piece):
     for i in range(3):
-        if (
-            board[0][i].get() == piece
-            and board[1][i].get() == piece
-            and board[2][i].get() == piece
-        ):
+        if all(board[j][i].get() == piece for j in range(3)):
             return True
     return False
 
 
 def check_diagonal(board, piece):
-    if (
-        board[0][0].get() == piece
-        and board[1][1].get() == piece
-        and board[2][2].get() == piece
-    ):
+    if all(board[i][i].get() == piece for i in range(3)):
         return True
-
-    if (
-        board[0][2].get() == piece
-        and board[1][1].get() == piece
-        and board[2][0].get() == piece
-    ):
+    if all(board[i][2 - i].get() == piece for i in range(3)):
         return True
-
     return False
 
 
 def check_draw(board):
-    count = 0
     for row in board:
         for cell in row:
-            if cell.get() == "X" or cell.get() == "O":
-                count += 1
+            if cell.get() not in ["X", "O"]:
+                return False
 
-    if count == 9:
-        return True
-    return False
+    return True
 
 
 def utility(board):
@@ -106,6 +81,7 @@ def result(board, action):
     current_turn = turn(board)
     board_copy[action[0]][action[1]].set(current_turn)
     return board_copy
+
 
 def minimax(board):
     board_actions = actions(board)
