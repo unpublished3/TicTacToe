@@ -3,5 +3,6 @@ A tictactoe game like all other. This is made for getting used to tkinter and mi
 
 ### ToDo
 - [x] UI
-- [ ] Game Implementation
+- [x] Game Implementation
+- [ ] Play Again
 - [ ] Minimax
