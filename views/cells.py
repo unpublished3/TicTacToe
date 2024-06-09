@@ -83,7 +83,7 @@ class Cells(tk.CTkFrame):
         self._click(i, j)
 
     def _handle_terminal(self):
-        print("Done!")
+        print(logic.utility(self._cells))
         for row in self._buttons:
             for button in row:
                 button.configure(state="disabled")

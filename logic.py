@@ -47,7 +47,7 @@ def check_vertical(board, piece):
         if (
             board[0][i].get() == piece
             and board[1][i].get() == piece
-            and board[1][i].get() == piece
+            and board[2][i].get() == piece
         ):
             return True
     return False
