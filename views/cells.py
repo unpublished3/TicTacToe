@@ -1,5 +1,6 @@
 import customtkinter as tk
 import logic
+import time
 
 class Cells(tk.CTkFrame):
     _buttons = []
@@ -18,6 +19,9 @@ class Cells(tk.CTkFrame):
         self._player = player
         self._configure_grid()
         self._create_cells()
+
+        if player != self._turn:
+            self._computer_move()
 
     def _configure_grid(self):
         self.grid_rowconfigure(0, weight=1)
@@ -56,4 +60,14 @@ class Cells(tk.CTkFrame):
     def _click(self, i, j):
         self._cells[i][j].set(logic.turn(self._cells))
         self._turn = logic.turn(self._cells)
-        self._parent.change_label_text(f"{self._player}'s Turn" if self._player == self._turn else "Computer Thinking...")
+        self._parent.change_label_text(
+            f"{self._player}'s Turn"
+            if self._player == self._turn
+            else "Computer Thinking..."
+        )
+        if self._player != self._turn:
+            self._computer_move()
+
+    def _computer_move(self):
+        i, j = logic.minimax(self._cells)
+        self._click(i, j)

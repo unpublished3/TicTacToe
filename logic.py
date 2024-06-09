@@ -1,5 +1,5 @@
 import copy
-
+import random
 
 def turn(board):
     x_count = 0
@@ -106,3 +106,9 @@ def result(board, action):
     current_turn = turn(board)
     board_copy[action[0]][action[1]].set(current_turn)
     return board_copy
+
+def minimax(board):
+    board_actions = actions(board)
+    action = random.choice(board_actions)
+
+    return action
