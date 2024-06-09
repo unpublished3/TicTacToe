@@ -12,19 +12,18 @@ def turn(board):
 
 
 def terminal(board):
-    if check_win(board, "X") or check_draw(board):
+    if check_win(board, "X") or check_win(board, "O") or check_draw(board):
         return True
     return False
 
 
-def check_win(board):
-    for piece in ["X", "O"]:
-        if (
-            check_diagonal(board, piece)
-            or check_horizontal(board, piece)
-            or check_vertical(board, piece)
-        ):
-            return True
+def check_win(board, piece):
+    if (
+        check_diagonal(board, piece)
+        or check_horizontal(board, piece)
+        or check_vertical(board, piece)
+    ):
+        return True
 
     return False
 
@@ -79,3 +78,11 @@ def check_draw(board):
     if count == 9:
         return True
     return False
+
+
+def utility(board):
+    if check_draw(board):
+        return 0
+    if check_win(board, "X"):
+        return 1
+    return -1
