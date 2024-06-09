@@ -52,6 +52,8 @@ class Cells(tk.CTkFrame):
                         corner_radius=0,
                         command=lambda i=i, j=j: self._click(i, j),
                         font=("Helvetica", self._text_font_size),
+                        text_color_disabled=("black", "white"),
+                        text_color=("black", "white"),
                     )
                 )
 
@@ -83,7 +85,15 @@ class Cells(tk.CTkFrame):
         self._click(i, j)
 
     def _handle_terminal(self):
-        print(logic.utility(self._cells))
         for row in self._buttons:
             for button in row:
                 button.configure(state="disabled")
+
+        utility = logic.utility(self._cells)
+
+        if utility == 0:
+            self._parent.change_label_text("Draw")
+        elif utility == 1:
+            self._parent.change_label_text("X wins")
+        elif utility == -1:
+            self._parent.change_label_text("O Wins")
