@@ -4,5 +4,5 @@ A tictactoe game like all other. This is made for getting used to tkinter and mi
 ### ToDo
 - [x] UI
 - [x] Game Implementation
-- [ ] Play Again
+- [x] Play Again
 - [ ] Minimax
