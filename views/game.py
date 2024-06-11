@@ -7,6 +7,7 @@ class Game(tk.CTkFrame):
     _text_font_size = None
     _label_text = None
     _cells = []
+    _play_again_button = None
 
     def __init__(self, parent, player):
         tk.CTkFrame.__init__(self, parent)
@@ -27,6 +28,7 @@ class Game(tk.CTkFrame):
 
         self._create_label()
         self.arrange_cells()
+        self.add_play_again()
 
     def _configure_grid(self):
         self.grid_rowconfigure(0, weight=1)
@@ -57,3 +59,19 @@ class Game(tk.CTkFrame):
 
     def arrange_cells(self):
         self.cells.grid(row=2, column=1, rowspan=6, columnspan=3, sticky="nsew")
+
+    def add_play_again(self):
+        self._play_again_button = tk.CTkButton(
+            self,
+            text="Play Again",
+            font=("Helvetica", self._text_font_size),
+            fg_color=("black", "white"),
+            text_color=("white", "black"),
+            border_spacing=10,
+            corner_radius=10,
+            anchor="center",
+            cursor="hand2",
+            hover_color=("#444546", "#b5b4b5"),
+            # command=lambda: self.set_player("X")
+        )
+        self._play_again_button.grid(row=9, column=0, columnspan=5, sticky="n")
