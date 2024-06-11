@@ -59,11 +59,11 @@ def check_draw(board):
 
 
 def utility(board):
-    if check_draw(board):
-        return 0
     if check_win(board, "X"):
         return 1
-    return -1
+    if check_win(board, "O"):
+        return -1
+    return 0
 
 
 def actions(board):
