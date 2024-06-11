@@ -15,6 +15,7 @@ class Game(tk.CTkFrame):
 
         self._configure_grid()
         self._player = player
+        self._parent = parent
 
         self._scale_factor = (self.winfo_screenwidth() * self.winfo_screenheight()) / (
             2560 * 1600
@@ -24,6 +25,9 @@ class Game(tk.CTkFrame):
         self._label_text = tk.StringVar(
             self, f"{player}'s Turn" if player == "X" else "Computer Thinking..."
         )
+
+        self._cells = []
+
         self.cells = Cells(self, player, self._cells)
 
         self._create_label()
@@ -50,7 +54,9 @@ class Game(tk.CTkFrame):
 
     def _create_label(self):
         label = tk.CTkLabel(
-            self, textvariable=self._label_text, font=("Helvetica", self._text_font_size)
+            self,
+            textvariable=self._label_text,
+            font=("Helvetica", self._text_font_size),
         )
         label.grid(row=0, column=0, columnspan=5, sticky="nsew")
 
@@ -72,6 +78,13 @@ class Game(tk.CTkFrame):
             anchor="center",
             cursor="hand2",
             hover_color=("#444546", "#e0e0e1"),
-            # command=lambda: self.set_player("X")
+            command=self._new_game,
         )
         self._play_again_button.grid(row=9, column=0, columnspan=5, sticky="n")
+
+    def _new_game(self):
+        del self.cells
+        for child in self.winfo_children():
+            child.destroy()
+
+        self._parent.set_player(None)
