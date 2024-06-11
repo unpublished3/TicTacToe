@@ -4,6 +4,7 @@ import logic
 
 class Cells(tk.CTkFrame):
     _buttons = []
+    _data = []
     _turn = "X"
 
     def __init__(self, parent, player, cells):
@@ -36,10 +37,13 @@ class Cells(tk.CTkFrame):
     def _create_cells(self):
         for i in range(3):
             self._cells.append([])
+            self._data.append([])
 
             self._buttons.append([])
             for j in range(3):
-                self._cells[i].append(tk.StringVar(self, ""))
+                self._data[i].append("")
+
+                self._cells[i].append(tk.StringVar(self))
                 self._buttons[i].append(
                     tk.CTkButton(
                         self,
@@ -61,20 +65,22 @@ class Cells(tk.CTkFrame):
                 self._buttons[i][j].grid(row=i, column=j, sticky="nsew")
 
     def _click(self, i, j):
-        if logic.terminal(self._cells):
+        if logic.terminal(self._data):
             self._handle_terminal()
             return
 
-        if self._cells[i][j].get() != "X" and self._cells[i][j].get() != "O":
-            self._cells[i][j].set(logic.turn(self._cells))
-            self._turn = logic.turn(self._cells)
+        if self._data[i][j] != "X" and self._data[i][j] != "O":
+            self._data[i][j] = logic.turn(self._data)
+            self._cells[i][j].set(self._data[i][j])
+
+            self._turn = logic.turn(self._data)
             self._parent.change_label_text(
                 f"{self._player}'s Turn"
                 if self._player == self._turn
                 else "Computer Thinking..."
             )
 
-            if logic.terminal(self._cells):
+            if logic.terminal(self._data):
                 self._handle_terminal()
                 return
 
@@ -82,7 +88,7 @@ class Cells(tk.CTkFrame):
                 self._computer_move()
 
     def _computer_move(self):
-        i, j = logic.minimax(self._cells)
+        i, j = logic.minimax(self._data)
         self._click(i, j)
 
     def _handle_terminal(self):
@@ -90,7 +96,7 @@ class Cells(tk.CTkFrame):
             for button in row:
                 button.configure(state="disabled")
 
-        utility = logic.utility(self._cells)
+        utility = logic.utility(self._data)
 
         if utility == 0:
             self._parent.change_label_text("Draw")
