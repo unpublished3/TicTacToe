@@ -38,13 +38,13 @@ class Menu(tk.CTkFrame):
             self,
             text="Play as X",
             font=("Helvetica", self._text_font_size),
-            fg_color=("black", "white"),
-            text_color=("white", "black"),
+            fg_color=("#2B2B2B", "#DBDBDB"),
+            text_color=("#DBDBDB", "#2B2B2B"),
             border_spacing=10,
             corner_radius=10,
             anchor="center",
             cursor="hand2",
-            hover_color=("#444546", "#b5b4b5"),
+            hover_color=("#444546", "#e0e0e1"),
             command=lambda: self.set_player("X")
         )
 
@@ -52,13 +52,13 @@ class Menu(tk.CTkFrame):
             self,
             text="Play as O",
             font=("Helvetica", self._text_font_size),
-            fg_color=("black", "white"),
-            text_color=("white", "black"),
+            fg_color=("#2B2B2B", "#DBDBDB"),
+            text_color=("#DBDBDB", "#2B2B2B"),
             border_spacing=10,
             corner_radius=10,
             anchor="center",
             cursor="hand2",
-            hover_color=("#444546", "#b5b4b5"),
+            hover_color=("#444546", "#e0e0e1"),
             command=lambda: self.set_player("O")
 
         )

@@ -50,7 +50,7 @@ class Game(tk.CTkFrame):
 
     def _create_label(self):
         label = tk.CTkLabel(
-            self, textvariable=self._label_text, font=("Arial", self._text_font_size)
+            self, textvariable=self._label_text, font=("Helvetica", self._text_font_size)
         )
         label.grid(row=0, column=0, columnspan=5, sticky="nsew")
 
@@ -65,13 +65,13 @@ class Game(tk.CTkFrame):
             self,
             text="Play Again",
             font=("Helvetica", self._text_font_size),
-            fg_color=("black", "white"),
-            text_color=("white", "black"),
+            fg_color=("#2B2B2B", "#DBDBDB"),
+            text_color=("#DBDBDB", "#2B2B2B"),
             border_spacing=10,
             corner_radius=10,
             anchor="center",
             cursor="hand2",
-            hover_color=("#444546", "#b5b4b5"),
+            hover_color=("#444546", "#e0e0e1"),
             # command=lambda: self.set_player("X")
         )
         self._play_again_button.grid(row=9, column=0, columnspan=5, sticky="n")
