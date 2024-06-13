@@ -89,7 +89,7 @@ class Cells(tk.CTkFrame):
                 self._computer_move()
 
     def _computer_move(self):
-        i, j = logic.minimax(self._data)
+        i, j = logic.minimax(self._data, False, True, 100, -100)
         self._click(i, j)
 
     def _handle_terminal(self):

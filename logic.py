@@ -85,8 +85,29 @@ def result(board, action):
     return board_copy
 
 
-def minimax(board):
-    board_actions = actions(board)
-    action = random.choice(board_actions)
+def minimax(board, maximizing, initial, min, max):
+    if terminal(board):
+        print(board)
+        return utility(board)
 
-    return action
+    board_actions = actions(board)
+    best_action = None
+
+    for action in board_actions:
+        # print(f"Action: {action}")
+        # print(best_action)
+        new_board = result(board, action)
+        if maximizing:
+            value = minimax(new_board, False, False, min, max)
+            if value > max:
+                max = value
+                best_action = action
+        else:
+            value = minimax(new_board, True, False, min, max)
+            if value < min:
+                min = value
+                best_action = action
+    # print(value)
+    if initial:
+        return best_action
+    return max if (maximizing) else min
