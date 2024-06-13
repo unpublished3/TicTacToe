@@ -87,15 +87,12 @@ def result(board, action):
 
 def minimax(board, maximizing, initial, min, max):
     if terminal(board):
-        print(board)
         return utility(board)
 
     board_actions = actions(board)
     best_action = None
 
     for action in board_actions:
-        # print(f"Action: {action}")
-        # print(best_action)
         new_board = result(board, action)
         if maximizing:
             value = minimax(new_board, False, False, min, max)
@@ -107,7 +104,6 @@ def minimax(board, maximizing, initial, min, max):
             if value < min:
                 min = value
                 best_action = action
-    # print(value)
     if initial:
         return best_action
     return max if (maximizing) else min

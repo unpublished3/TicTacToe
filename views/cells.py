@@ -81,6 +81,8 @@ class Cells(tk.CTkFrame):
                 else "Computer Thinking..."
             )
 
+            self.update_idletasks()
+
             if logic.terminal(self._data):
                 self._handle_terminal()
                 return
