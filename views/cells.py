@@ -17,6 +17,7 @@ class Cells(tk.CTkFrame):
         self._text_font_size = 50 * self._scale_factor
         self._parent = parent
         self._buttons = []
+        self._data = []
 
         self._player = player
         self._configure_grid()
