@@ -1,5 +1,6 @@
 import customtkinter as tk
 import logic
+from concurrent.futures import ProcessPoolExecutor, as_completed
 
 
 class Cells(tk.CTkFrame):
@@ -23,6 +24,7 @@ class Cells(tk.CTkFrame):
         self._configure_grid()
         self._create_cells()
 
+        self.executor = ProcessPoolExecutor(max_workers=1)
         if player != self._turn:
             self._computer_move()
 
@@ -91,8 +93,17 @@ class Cells(tk.CTkFrame):
                 self._computer_move()
 
     def _computer_move(self):
-        i, j = logic.minimax(self._data, False if self._player == "X" else True, True, 100, -100)
-        self._click(i, j)
+        future = self.executor.submit(
+            logic.minimax, self._data, False if self._player == "X" else True, True, 100, -100
+        )
+        future.add_done_callback(self._generate_computer_move)
+
+    def _generate_computer_move(self, future):
+        print("hehe")
+        print(future.done())
+        if future.done():
+            i, j = future.result()
+            self._click(i, j)
 
     def _handle_terminal(self):
         for row in self._buttons:

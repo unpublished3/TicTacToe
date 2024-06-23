@@ -56,5 +56,6 @@ class Window(tk.CTk):
         self.resizable(False, False)
 
 
-window = Window()
-window.mainloop()
+if __name__ == "__main__":
+    window = Window()
+    window.mainloop()
