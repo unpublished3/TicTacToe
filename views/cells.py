@@ -93,23 +93,32 @@ class Cells(tk.CTkFrame):
                 self._computer_move()
 
     def _computer_move(self):
+        self._disable_buttons()
         future = self.executor.submit(
             logic.minimax, self._data, False if self._player == "X" else True, True, 100, -100
         )
         future.add_done_callback(self._generate_computer_move)
 
     def _generate_computer_move(self, future):
-        print("hehe")
-        print(future.done())
+        self._enable_buttons()
         if future.done():
             i, j = future.result()
             self._click(i, j)
 
-    def _handle_terminal(self):
+    def _disable_buttons(self):
         for row in self._buttons:
             for button in row:
                 button.configure(state="disabled")
 
+    def _enable_buttons(self):
+        for row in self._buttons:
+            for button in row:
+                button.configure(state="normal")
+
+
+
+    def _handle_terminal(self):
+        self._disable_buttons()
         utility = logic.utility(self._data)
 
         if utility == 0:
